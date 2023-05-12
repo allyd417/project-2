@@ -27,10 +27,11 @@ function Employee_Tracker() {
           'Add a New Department',
           'Add a New Role',
           'Add a New Employee', //Needs a fix
+          'Add a New Manager',
           'Update an Existing Employee Role',
           'Update an Existing Department',
-          // M8 + l8r'View Employee By Department'
-          //M8 + l8r'View Employee By Manager'
+          // View Employee By Department
+          //View Employee By Manager
           'Log Out',
         ], // Might add other elements later
       },
@@ -167,18 +168,43 @@ function Employee_Tracker() {
       }
 
 
-      // Should View Add a New Employee in the DataBase
-      else if (answers.prompt === 'Add a New Employee') {
-        // Calling the database to acquire the roles and managers
-        db.query(`SELECT * FROM role`, (err, result) => {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+      
+         
+      
+
+
+      else if (answers.prompt === 'Add a New Manager') {
+        // Calling the database to acquire the departments
+        db.query(`SELECT * FROM department`, (err, result) => {
           if (err) throw err;
           inquirer
             .prompt([
               {
-                // Adding Employee First Name
+                // Adding Manager First Name
                 type: 'input',
                 name: 'firstName',
-                message: "What is the employee's first name?",
+                message: "What is the Manager's first name?",
                 validate: (firstNameInput) => {
                   if (firstNameInput) {
                     return true;
@@ -189,10 +215,10 @@ function Employee_Tracker() {
                 },
               },
               {
-                // Adding Employee Last Name
+                // Adding Manager Last Name
                 type: 'input',
                 name: 'lastName',
-                message: "What is the employee's last name?",
+                message: "What is the Manager's last name?",
                 validate: (lastNameInput) => {
                   if (lastNameInput) {
                     return true;
@@ -203,58 +229,130 @@ function Employee_Tracker() {
                 },
               },
               {
-                // Adding Employee Role
+                // Choose a Department to Manage
                 type: 'list',
-                name: 'role',
-                message: "What is the employee's role?",
-                choices: () => {
-                  var array = [];
-                  for (var i = 0; i < result.length; i++) {
-                    array.push(result[i].title);
-                  }
-                  var newArray = [...new Set(array)];
-                  return newArray;
-                },
-              },
-              {
-                // Adding Employee Manager
-                type: 'input',
-                name: 'manager',
-                message: "Who is the employee's manager?",
-                validate: (managerInput) => {
-                  if (managerInput) {
-                    return true;
-                  } else {
-                    console.log('Please Add A Manager!');
-                    return false;
-                  }
-                },
+                name: 'departmentId',
+                message: 'Which department is the Manager managing?',
+                choices: result.map((department) => ({
+                  name: department.name,
+                  value: department.id,
+                })),
               },
             ])
-            .then((answers) => {
-              // Comparing the result and storing it into the variable
-              for (var i = 0; i < result.length; i++) {
-                if (result[i].title === answers.role) {
-                  var role = result[i];
-                  break;
-                }
-              }
+            .then((managerAnswers) => {
+              inquirer
+                .prompt([
+                  {
+                    // Choose whether to edit Manager's salary or information
+                    type: 'list',
+                    name: 'editOption',
+                    message: 'Would you like to edit the Manager information or salary?',
+                    choices: ['Edit Information', 'Edit Salary'],
+                  },
+                  {
+                    // Edit Manager's Information
+                    type: 'input',
+                    name: 'editInformation',
+                    message: "What would you like to update the Manager's information to?",
+                    when: (answers) => answers.editOption === 'Edit Information',
+                  },
+                  {
+                    // Edit Manager's Salary
+                    type: 'input',
+                    name: 'editSalary',
+                    message: "What would you like to update the Manager's salary to?",
+                    validate: (salaryInput) => {
+                      if (isNaN(salaryInput) || salaryInput <= 0) {
+                        console.log('Please enter a valid salary!');
+                        return false;
+                      } else {
+                        return true;
+                      }
+                    },
+                    when: (answers) => answers.editOption === 'Edit Salary',
+                  },
+                ])
+                .then((editAnswers) => {
+                  const { editOption, editInformation, editSalary } = editAnswers;
       
-              db.query(
-                `INSERT INTO employee (first_name, last_name, role_id) VALUES (?, ?, ?)`,
-                [answers.firstName, answers.lastName, role.id],
-                (err, result) => {
-                  if (err) throw err;
-                  console.log(
-                    `Added ${answers.firstName} ${answers.lastName} to the database.`
-                  );
-                  Employee_Tracker();
-                }
-              );
+                  // Updating the Manager information or salary based on user input
+                  let query = `UPDATE manager SET `;
+                  if (editOption === 'Edit Information') {
+                    query += `first_name = "${editInformation.split(' ')[0]}", last_name = "${editInformation.split(' ')[1]}", `;
+                  } else if (editOption === 'Edit Salary') {
+                    query += `salary = ${editSalary}, `;
+                  }
+                  query += `department_id = ${managerAnswers.departmentId} WHERE first_name = "${managerAnswers.firstName}" AND last_name = "${managerAnswers.lastName}"`;
+                  db.query(query, (err, result) => {
+                    if (err) throw err;
+                    console.log(`Successfully updated Manager information in the database.`);
+                    Employee_Tracker();
+                  });
+                });
             });
         });
       }
-         
+      
+
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -375,4 +473,4 @@ else if (answers.prompt === 'Update an Existing Department') {
         process.exit()
       }
     })
-  }
+  };

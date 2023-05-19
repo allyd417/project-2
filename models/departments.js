@@ -2,7 +2,7 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../Databse/connection');
 
 class Department extends Model {}
-
+<script src="project-2\server.js"></script>
 Department.init(
     {
         id: {
@@ -41,6 +41,7 @@ Department.init(
   }
 
 );
+
 
 module.exports = Department;
 

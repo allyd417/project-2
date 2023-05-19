@@ -10,17 +10,36 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const app = express();
 const PORT = process.env.PORT || 3001; // Change this to your desired port
 
+const hbs = exphbs.create({});
+
+const sess = {
+	secret: 'Super secret secret',
+	cookie: {
+		maxAge: 1000 * 60 * 60 * 2,
+		httpOnly: true,
+		secure: false,
+		sameSite: 'strict',
+	},
+	resave: false,
+	saveUninitialized: true,
+	store: new SequelizeStore({
+		db: sequelize,
+	}),
+};
+
+app.use(session(sess));
+
 // Set up Handlebars as the template engine
-app.engine('handlebars', exphbs());
+app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
-// Set up static file serving
-app.use(express.static('public'));
+//middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Routes
-app.get('/', (req, res) => {
-  res.render('index', { title: 'Home' });
-});
+// import all your routes from controllers/index.js
+app.use(routes);
 
 // Add more routes and connect to controllers and models as needed
 const controllersModels = require('./controllers/index.js');

@@ -23,8 +23,8 @@ app.get('/', (req, res) => {
 });
 
 // Add more routes and connect to controllers and models as needed
-const controllersModels = require('./controllers/index');
-const userModel = require('./models/userModel');
+const controllersModels = require('./controllers/index.js');
+const modelUser = require('./models/user.js');
 
 app.get('/users', async (req, res) => {
   try {

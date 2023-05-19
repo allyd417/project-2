@@ -1,8 +1,14 @@
+const path = require('path');
 const express = require('express');
 const exphbs = require('express-handlebars');
+const session = require('express-session');
+const routes = require('./controllers');
+
+const sequelize = require('./config/connection');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const app = express();
-const port = 3001; // Change this to your desired port
+const PORT = process.env.PORT || 3001; // Change this to your desired port
 
 // Set up Handlebars as the template engine
 app.engine('handlebars', exphbs());
@@ -17,8 +23,8 @@ app.get('/', (req, res) => {
 });
 
 // Add more routes and connect to controllers and models as needed
-const controllersModels = require('project-2/controllers/index.js');
-const userModel = require('project-2/models/userModel.js');
+const controllersModels = require('./controllers/index');
+const userModel = require('./models/userModel');
 
 app.get('/users', async (req, res) => {
   try {
@@ -31,6 +37,6 @@ app.get('/users', async (req, res) => {
 });
 
 // Start the server
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
 });

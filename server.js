@@ -4,6 +4,24 @@ const db = require('./Database/connection');
 const mysql = require('mysql');
 require('dotenv').config(); // Load environment variables from .env file
 
+const express = require('express');
+const exphbs = require('express-handlebars');
+
+const app = express();
+const port = 3001; // Change this to your desired port
+
+// Set up Handlebars as the template engine
+app.engine('handlebars', exphbs());
+app.set('view engine', 'handlebars');
+
+// Routes
+app.get('/', (req, res) => {
+  res.render('index', { title: 'Home' });
+});
+
+app.get('/about', (req, res) => {
+  res.render('about', { title: 'About Us' });
+});
 // Start server after the DB connection
 db.connect((err) => {
   if (err) throw err;
@@ -275,8 +293,6 @@ else if (answers.prompt === 'Update an Existing Department') {
   });
 }
 
-
-
       // Should let the User be able to log out.
       else if (answers.prompt === 'Log Out') {
         console.log('Logging Out');
@@ -284,3 +300,15 @@ else if (answers.prompt === 'Update an Existing Department') {
       }
     })
   };
+
+  // Start server after the DB connection
+db.connect((err) => {
+  if (err) throw err;
+  console.log('Database is Connected');
+  Employee_Tracker();
+});
+
+// Start the server
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
+});

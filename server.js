@@ -1,17 +1,25 @@
-// Package Requirements for project and also definitions and dependencies
 const inquirer = require('inquirer');
 const db = require('./Database/connection');
 const mysql = require('mysql');
-require('dotenv').config(); // Load environment variables from .env file
+require('dotenv').config();
 
 const express = require('express');
 const exphbs = require('express-handlebars');
+const path = require('path');
 
 const app = express();
 const port = 3001; // Change this to your desired port
 
 // Set up Handlebars as the template engine
-app.engine('handlebars', exphbs());
+app.set('views', path.join(__dirname, 'views'));
+app.engine(
+  'handlebars',
+  exphbs({
+    helpers: require('project-2/utils/helpers.js'),
+    defaultLayout: require('project-2\views\layouts\main.handlebars'), // Specify your default layout file name
+    // Other configuration options
+  })
+);
 app.set('view engine', 'handlebars');
 
 // Routes
@@ -22,12 +30,14 @@ app.get('/', (req, res) => {
 app.get('/about', (req, res) => {
   res.render('about', { title: 'About Us' });
 });
+
 // Start server after the DB connection
 db.connect((err) => {
   if (err) throw err;
   console.log('Database is Connected');
   Employee_Tracker();
 });
+
 
 // Function to handle the Employee Tracker application
 function Employee_Tracker() {

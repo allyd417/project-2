@@ -1,7 +1,7 @@
 {
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "server.js",
+    "start": "express.js",
     "seed": "node seeds/seed.js"
   },
   "dependencies": {

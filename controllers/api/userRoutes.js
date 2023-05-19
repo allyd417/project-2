@@ -1,5 +1,32 @@
 const router = require('express').Router();
+const { Department } = require('../../models/departments');
 const { User } = require('../..models');
+const { Employee } = require('../..models');
+
+router.post('/', async (req, res) => {
+    try {
+        const newEmployee = await Employee.create({
+            ...req.bidy,
+            user_id: req.session.user_id,
+        });
+
+        res.status(200).json(newEmployee);
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
+router.post('/', async (req, res) => {
+    try {
+        const newDapartmetn = await Department.create({
+            ...req.bidy,
+            user_id: req.session.user_id,
+        });
+
+        res.status(200).json(newDapartmetn);
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
 
 router.post('/login', async (req, res) => {
     try {

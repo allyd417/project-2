@@ -22,14 +22,5 @@ CREATE TABLE employee (
     FOREIGN KEY (role_id) REFERENCES role(id)
 );
 
-CREATE TABLE Manager (
-  id INT NOT NULL AUTO_INCREMENT,
-  first_name VARCHAR(255) NOT NULL,
-  last_name VARCHAR(255) NOT NULL,
-  department_id INT NOT NULL,
-  title VARCHAR(255) NOT NULL,
-  salary DECIMAL(10,2) NOT NULL,
-  PRIMARY KEY (id),
-  FOREIGN KEY (department_id) REFERENCES department (id)
-);
+
 

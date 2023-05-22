@@ -1,19 +1,58 @@
 const router = require('express').Router();
-const { User } = require('../models');
+const { User, Employee, } = require('../models');
 const withAuth = require('../utils/auth');
 
-router.get('/', withAuth, async (req, res) => {
+
+//GET route for homepage
+router.get('/', (req, res) => {
+    if (req.session.logged_in) {
+        res.redirect('/dashboard');
+        return;
+    }
+
+    res.render('home', {
+        loggedIn: req.session.logged_in,
+    });
+});
+
+router.get('/dashbaord', withAuth, async (req, res) => {
     try {
-        const userData = await User.findAll({
-            attributes: { exclude: ['password'] },
-            order: [['name', 'ASC']],
+     const employeeData = await Employee.findAll({
+        include: [
+            {
+                model: User,
+                attributes: ['first_name', 'last_name']
+            },
+        ],
+     });
+
+     const employee = employeeData.map((employee) => employee.get({ plain: true }));
+
+     res.render('dashboard', {
+        ...employee,
+        logged_in: req.session.logged_in
+     });
+    } catch (err) { 
+        res.status(500).json(err);
+    }
+});
+router.get('/employee/:id', withAuth, async (req, res) => {
+    try {
+        const employeeData = await Employee.findByPk(req.params.id, {
+            include: [
+                {
+                    model: User,
+                    attributes: ['first_name', 'last_name', 'role_id', 'id'],
+
+                },
+            ],
         });
 
-        const users = usersData.map((project) => project.get({ plain: true}));
-
-        res.render('homepage', {
-            users,
-            logged_in: req.session.logged_in,
+        const Employee = employeeData.get({plain: true});
+        
+        res.render('dashboard', {
+            employee,
+            logged_in: req.session.logged_in
         });
     } catch (err) {
         res.status(500).json(err);
@@ -22,7 +61,7 @@ router.get('/', withAuth, async (req, res) => {
 
 router.get('/login', (req, res) => {
     if (req.session.logged_in) {
-        res.redirect('/');
+        res.redirect('/dashboard');
         return;
     }
 

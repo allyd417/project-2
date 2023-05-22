@@ -1,0 +1,65 @@
+<div class="masthead">
+    <h2 class="masthead">
+        Dashboard
+    </h2>
+    <h3>
+        Welcome Back, {{currentuser.first_name}}
+    </h3>
+</div>
+
+<div class="employee-card-container">
+    {{#each employee as |employee|}}
+    <div class="employee-card" id="employee-{{employee.id}}">
+        <h2>
+            {{employee.department}}
+        </h2>
+        <p>
+            {{employee.role}}
+        </p>
+        <a href="/employee/{{employee.id}}">
+            <button>
+                View Details
+            </button>
+        </a>
+    </div>
+    {{/each}}
+</div>
+
+<div class="masthead employee-masthead">
+    <h2>
+        Create A New Employee
+        <span id="new-employee-span">
+            +
+        </span>
+    </h2>
+</div>
+
+{{! new employee form}}
+<div id="new-employee-form-container" class="hide">
+    <form id="new-employee-form" data-id="{{currentUser.id}}">
+        <label for="employee-name">
+            Employee Name:
+        </label>
+        <input type="text" id="employee" name="employee" required>
+        <label for="role">
+            Role:
+        </label>
+        <input type="text" id="role" name="role">
+        <label for="department">
+            Department
+        </label>
+        <input type="text" id="department" =name="department">
+        <select name="assigned_employee_id" id="assigned_employee_id">
+            {{#each employee as |employee|}}
+            <option value="{{employee.id}}">
+                {{employee.first_name}}, {{employee.last_name}}
+            </option>
+            {{/each}}
+        </select>
+        <button type="submit">
+            Create New Employee
+        </button>
+    </form>
+</div>
+
+<script src="/js/dashboard.js"></script>

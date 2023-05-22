@@ -1,0 +1,23 @@
+<div class='admin-container'>
+	{{#each users as |user|}}
+		<div class='user-card'>
+			<h2>
+				{{user.first_name}}, {{user.last_name}}
+			</h2>
+			<p>
+				{{user.email}}
+			</p>
+			<p>
+				Is Admin?
+				{{#if (eq user.user_id 1)}}
+					Yes
+				{{else}}
+					No
+				{{/if}}
+			</p>
+			<a href='/admin/update/{{user.id}}'>
+				Update User
+			</a>
+		</div>
+	{{/each}}
+</div>

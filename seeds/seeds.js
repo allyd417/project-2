@@ -2,17 +2,21 @@ const sequlize = require('../config/connection');
 const { User, Employee, Department } = require('../models');
 
 const userData = require('./userData.json');
-// const employeeData = require('./employeeData.json');
+const employeeData = require('./employeeData.json');
 // const departmentData = require('/departmentData.json');
 
 
 const seedDatabase = async () => {
     await sequlize.sync({ force: true });
 
-    await User.bulkCreate(userData, {
-        individualHooks: true,
-        returning: true,
-    });
+    // await User.destroy({where:{},truncate:true});
+
+    // await User.bulkCreate(userData, {
+    //     individualHooks: true,
+    //     returning: true,
+    // });
+
+    await Employee.bulkCreate(employeeData,{returning:true})
 
     // for (const employee of employeeData) {
     //     await Employee.create({

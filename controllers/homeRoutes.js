@@ -15,21 +15,21 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/dashbaord', withAuth, async (req, res) => {
+router.get('/dashboard', withAuth, async (req, res) => {
     try {
      const employeeData = await Employee.findAll({
         include: [
             {
                 model: User,
-                attributes: ['first_name', 'last_name']
+                attributes: ['name', 'email']
             },
         ],
      });
 
-     const employee = employeeData.map((employee) => employee.get({ plain: true }));
-
+     const employees = employeeData.map((employee) => employee.get({ plain: true }));
+     
      res.render('dashboard', {
-        ...employee,
+        employees,
         logged_in: req.session.logged_in
      });
     } catch (err) { 

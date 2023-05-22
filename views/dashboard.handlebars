@@ -3,18 +3,18 @@
         Dashboard
     </h2>
     <h3>
-        Welcome Back, {{currentuser.first_name}}
+        Welcome Back, {{user.name}}
     </h3>
 </div>
-
+{{log employees}}
 <div class="employee-card-container">
-    {{#each employee as |employee|}}
+    {{#each employees as |employee|}}
     <div class="employee-card" id="employee-{{employee.id}}">
         <h2>
-            {{employee.department}}
+            {{employee.name}}
         </h2>
         <p>
-            {{employee.role}}
+            {{employee.id}}
         </p>
         <a href="/employee/{{employee.id}}">
             <button>

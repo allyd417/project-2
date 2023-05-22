@@ -1,26 +1,18 @@
 [
     {
-        "first_name": "Jack",
-        "last_name": "Daxter",
-        "role_id": "6",
+        "name": "Jack Daxter",
         "id": "1"
     },
     {
-        "first_name": "Master",
-        "last_name": "Chief",
-        "role_id": "15",
+        "name": "Master Chief",
         "id": "2"
     },
     {
-        "first_name": "Jesus",
-        "last_name": "Christ",
-        "role_id": "13",
+        "name": "Jesus Christ",
         "id": "3"
     },
     {
-        "first_name": "Lord",
-        "last_name": "Cthulu",
-        "role_id": "2",
+        "name": "Lord Cthulu",
         "id": "4"
     }
 ]

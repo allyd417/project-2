@@ -9,12 +9,11 @@ const employeeData = require('./employeeData.json');
 const seedDatabase = async () => {
     await sequlize.sync({ force: true });
 
-    // await User.destroy({where:{},truncate:true});
 
-    // await User.bulkCreate(userData, {
-    //     individualHooks: true,
-    //     returning: true,
-    // });
+    await User.bulkCreate(userData, {
+       individualHooks: true,
+         returning: true,
+     });
 
     await Employee.bulkCreate(employeeData,{returning:true})
 

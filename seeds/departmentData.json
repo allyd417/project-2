@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "department_name": "Accounting"
+    },
+    {
+        "id": 2,
+        "department_name": "Utility"
+    },
+    {
+        "id": 3,
+        "department_name": "Sales"
+    },
+    {
+        "id": 4,
+        "department_name": "Information Technology"
+    }
+]

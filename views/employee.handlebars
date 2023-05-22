@@ -1,0 +1,34 @@
+{{! employee page}}
+<div class="employee-detail">
+    {{log employee}}
+    {{ log enabled }}
+    <div id="employee-deatil-card" data-id="{{employee.id}}">
+        <h2>
+            {{#if enabled}}
+                <input aria-label="employee name" id="employee-name" type="text" value="{{employee.name}}"/>
+            {{else}}
+                {{employee.name}}
+            {{/if}}
+        </h2>
+
+        {{#if enabled}}
+            <textarea aria-label="employee role" id="employee-role">{{employee.role}}</textarea>
+        {{else}}
+            {{employee.role}}
+        {{/if}}
+    
+    
+    <div class="employee-detail-buttons">
+    <button id='delete-employee-btn' data-id='{{employee.id}}' {{#if enabled}}'' {{else}} disabled{{/if}}>
+      Delete Employee
+    </button>
+
+    <button id='update-employee-btn' data-id='{{employee.id}}'{{#if enabled}}'' {{else}} disabled{{/if}}>
+      Update employee
+    </button>
+  </div>
+
+
+    </div>
+</div>
+<script src="/js/employee.js"></script>

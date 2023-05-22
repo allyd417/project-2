@@ -3,18 +3,19 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta anme="viewport" content="width=device-width, inital-scale=1.0">
+    <meta name="viewport" content="width=device-width, inital-scale=1.0">
     <title>OMICRON</title>
     <link rel="stylesheet" href="placeholder"> 
     <script src="project-2\server.js"></script>
 </head>
 
 <body>
-    <header class="display-flex justify-space-between align-center p-2">
-        <h1>
-            User Registry
-        </h1>
-        {{#if logged_in}}
+    <div class="flex-column justify-space-around">
+        <header class="display-flex justify-space-between align-center p-2">
+            <h1>
+                OMICRON
+            </h1>
+            {{#if logged_in}}
         <nav>
             <button class="btn" id="logout">logout</button>
         </nav>
@@ -27,6 +28,8 @@
     <footer>
 
     </footer>
+    </div>
+
 
     {{#if logged_in}}
     <script src="/js/logout.js"></script>

@@ -1,32 +1,46 @@
 const router = require('express').Router();
-const { User, Employee, Department } = require('../../models');
+const { User } = require('../../models');
 
-router.post('/', async (req, res) => {
-	try {
-		const newEmployee = await Employee.create({
-			...req.bidy,
-			user_id: req.session.user_id,
-		});
+// router.post('/', async (req, res) => {
+// 	try {
+// 		const newEmployee = await Employee.create({
+// 			...req.body,
+// 			user_id: req.session.user_id,
+// 		});
 
-		res.status(200).json(newEmployee);
-	} catch (err) {
-		res.status(400).json(err);
-	}
-});
-router.post('/', async (req, res) => {
-	try {
-		const newDapartmetn = await Department.create({
-			...req.bidy,
-			user_id: req.session.user_id,
-		});
+// 		res.status(200).json(newEmployee);
+// 	} catch (err) {
+// 		res.status(400).json(err);
+// 	}
+// });
+// router.post('/', async (req, res) => {
+// 	try {
+// 		const newDapartment = await Department.create({
+// 			...req.body,
+// 			user_id: req.session.user_id,
+// 		});
 
-		res.status(200).json(newDapartmetn);
-	} catch (err) {
-		res.status(400).json(err);
-	}
-});
+// 		res.status(200).json(newDapartment);
+// 	} catch (err) {
+// 		res.status(400).json(err);
+// 	}
+// });
+
+// router.post('/', async (req, res) => {
+// 	try {
+// 		const newRoles = await Roles.create({
+// 			...req.body,
+// 			user_id: req.session.user_id,
+// 		});
+
+// 		res.status(200).json(newRoles);
+// 	} catch (err) {
+// 		res.status(400).json(err);
+// 	}
+// });
 
 router.post('/login', async (req, res) => {
+	console.log('loginroute')
 	try {
 		const userData = await User.findOne({ where: { email: req.body.email } });
 		if (!userData) {

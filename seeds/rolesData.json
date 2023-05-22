@@ -1,0 +1,112 @@
+[
+    {
+        "title": "Data Entry",
+        "Salary": "65000",
+        "department_id": "1",
+        "role_id": "1"
+        
+    },
+    {
+        "title": "Accountant",
+        "Salary": "85000",
+        "department_id": "1",
+        "role_id": "2"
+    },
+    {
+        "title": "Bookkeeper",
+        "Salary": "50000",
+        "department_id": "1",
+        "role_id": "3"
+    },
+    {
+        "title": "Auditor",
+        "Salary": "60232",
+        "department_id": "1",
+        "role_id": "4"
+    },
+    {
+        "title": "Senior Accountant",
+        "Salary": "100000",
+        "department_id": "1",
+        "role_id": "5"
+    },
+    {
+        "title": "Janitor",
+        "Salary": "32000",
+        "department_id": "2",
+        "role_id": "6"
+    },
+    {
+        "title": "RepairPerson",
+        "Salary": "45000",
+        "department_id": "2",
+        "role_id": "7"
+    },
+    {
+        "title": "Electrican",
+        "Salary": "50000",
+        "department_id": "2",
+        "role_id": "8"
+    },
+    {
+        "title": "Plumber",
+        "Salary": "48000",
+        "department_id": "2",
+        "role_id": "9"
+    },
+    {
+        "title": "Sales Associate",
+        "Salary": "35000",
+        "department_id": "3",
+        "role_id": "10"
+    },
+    {
+        "title": "Junior Sales Associate",
+        "Salary": "40000",
+        "department_id": "3",
+        "role_id": "11"
+    },
+    {
+        "title": "Senior Sales Associate",
+        "Salary": "55000",
+        "department_id": "3",
+        "role_id": "12"
+    },
+    {
+        "title": "Assistant",
+        "Salary": "45000",
+        "department_id": "3",
+        "role_id": "13"
+    },
+    {
+        "title": "Location Manager",
+        "Salary": "60000",
+        "department_id": "3",
+        "role_id": "14"
+    },
+    {
+        "title": "Junior IT Associate",
+        "Salary": "50000",
+        "department_id": "4",
+        "role_id": "15"
+    },
+    {
+        "title": "Senior IT Associate",
+        "Salary": "70000",
+        "department_id": "4",
+        "role_id": "16"
+    },
+    {
+        "title": "CyberSecurity Expert",
+        "Salary": "95000",
+        "department_id": "4",
+        "role_id": "17"
+        
+    },
+    {
+        "title": "FullStack Website Developer",
+        "Salary": "57000",
+        "department_id": "4",
+        "role_id": "18"
+    }
+]

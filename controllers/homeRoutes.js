@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
         return;
     }
 
-    res.render('home', {
+    res.render('homepage', {
         loggedIn: req.session.logged_in,
     });
 });

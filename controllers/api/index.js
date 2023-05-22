@@ -4,7 +4,7 @@ const employeeRoutes = require('./employeeRoutes.js');
 const departmentRoutes = require('./departmentRoutes.js');
 
 
-router.use('/users', userRoutes);
+router.use('/user', userRoutes);
 router.use('/employee', employeeRoutes); 
 router.use('/department', departmentRoutes);
 

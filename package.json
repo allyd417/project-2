@@ -2,6 +2,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
+    "heroku-postbuild": "npm rebuild bcrypt --build-from-source",
     "seeds": "node seeds/seeds.js"
   },
   "dependencies": {
